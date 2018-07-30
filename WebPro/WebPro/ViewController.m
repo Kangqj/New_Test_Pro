@@ -38,6 +38,20 @@
     textField.text = @"http://www.baidu.com";
     [textField becomeFirstResponder];
     
+    /*
+     _docSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0f,0.0f, kScreenWidth, 44.0f)];
+     _docSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+     _docSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+     _docSearchBar.keyboardType = UIKeyboardTypeDefault;
+     _docSearchBar.delegate = self;
+     
+     UIView *searchBK = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+     [searchBK setBackgroundColor:[UIColor colorWithRed:236.f/255.f green:236.f/255.f blue:236.f/255.f alpha:1]];
+     [_docSearchBar insertSubview:searchBK atIndex:1];
+     [searchBK release];
+
+     */
+    
     self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 60, self.view.bounds.size.width, self.view.bounds.size.height - 60)];
 //    m_webView.delegate = self;
     [self.view  addSubview:self.webView];
