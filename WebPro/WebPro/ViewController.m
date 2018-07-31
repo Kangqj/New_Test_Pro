@@ -10,16 +10,19 @@
 #import <WebKit/WebKit.h>
 #import "UIImage+InsetEdge.h"
 #import "FSActionSheet.h"
+#import <Photos/Photos.h>
 
-@interface ViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate>
+@interface ViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate, PHPhotoLibraryChangeObserver>
 {
     UIImage *_saveImage;
     NSString *_qrCodeString;
-
+    
 }
 
 @property (nonatomic,strong)WKWebView *webView;
 @property (nonatomic,strong) UIProgressView *progress;
+@property (nonatomic, strong) PHFetchResult *assetsFetchResults;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 
 @end
 
@@ -53,17 +56,80 @@
      */
     
     self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 60, self.view.bounds.size.width, self.view.bounds.size.height - 60)];
-//    m_webView.delegate = self;
     [self.view  addSubview:self.webView];
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
-
+    
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 60, CGRectGetWidth(self.view.frame), 1)];
     lineView.backgroundColor = [UIColor grayColor];
     [self.view addSubview:lineView];
-
+    
     UILongPressGestureRecognizer * longPressed = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
     longPressed.delegate = self;
+    longPressed.minimumPressDuration = 0.1;
+    longPressed.allowableMovement = self.view.bounds.size.width;
     [self.webView addGestureRecognizer:longPressed];
+    
+    [self startManager];
+}
+
+
+- (void)startManager { //注册相册的监听
+    dispatch_async(dispatch_queue_create(0, 0), ^{
+        self.dataSource = [[NSMutableArray alloc] init];
+        self.assetsFetchResults = [[PHFetchResult alloc] init];
+        [[PHPhotoLibrary sharedPhotoLibrary] registerChangeObserver:self];
+        self.assetsFetchResults = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:[self getFetchPhotosOptions]];
+    });
+}
+
+- (void)photoLibraryDidChange:(PHChange *)changeInstance {
+    //注：监听到动作之后要在主线程做处理
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // 监听相册视频发生变化
+        PHFetchResultChangeDetails *collectionChanges = [changeInstance changeDetailsForFetchResult:self.assetsFetchResults];
+        if (collectionChanges) {
+            if ([collectionChanges hasIncrementalChanges]) {
+                //监听相册视频的增删
+                //增加了
+                if (collectionChanges.insertedObjects.count > 0) {
+                    NSMutableArray *mArr = [[NSMutableArray alloc] initWithArray:collectionChanges.insertedObjects];
+                    if (mArr.count > 0)
+                    {
+                        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+                            [PHAssetChangeRequest deleteAssets:mArr];
+                        } completionHandler:^(BOOL success, NSError * _Nullable error) {
+                            NSLog(@"删除完毕:%d", success);
+                        }];
+                    }
+                    
+                    NSLog(@"add a picture:%d", mArr.count);
+                }
+                //删除了
+                if (collectionChanges.removedObjects.count > 0) {
+                    NSMutableArray *mArr = [[NSMutableArray alloc] initWithArray:collectionChanges.removedObjects];
+                    
+                    NSLog(@"delete a picture");
+                }
+                
+                /*监听完一次更新一下监听对象*/
+                self.assetsFetchResults = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:[self getFetchPhotosOptions]];
+            }
+        }
+    });
+}
+
+//筛选的规则和范围
+- (PHFetchOptions *)getFetchPhotosOptions{
+    PHFetchOptions *allPhotosOptions = [[PHFetchOptions alloc]init];
+    //排序的方式为：按时间排序
+    allPhotosOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+    return allPhotosOptions;
+}
+
+- (void)stopManager { //注销相册的监听
+    dispatch_async(dispatch_queue_create(0, 0), ^{
+        [[PHPhotoLibrary sharedPhotoLibrary] unregisterChangeObserver:self];
+    });
 }
 
 - (UIProgressView *)progress
@@ -155,7 +221,6 @@
     return YES;
 }
 
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField.text && textField.text.length > 0)
@@ -218,6 +283,10 @@
     NSLog(@"save result :%@", message);
 }
 
+- (void)dealloc
+{
+    [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
