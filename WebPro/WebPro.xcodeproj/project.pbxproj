@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04F785652114620000D69360 /* WebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F785642114620000D69360 /* WebViewViewController.m */; };
+		AC77B5BB5DC918AED2A0D25C /* libPods-WebPro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57498DB6E24481EF76896D65 /* libPods-WebPro.a */; };
 		C31A7A82210EB13E007592DB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C31A7A81210EB13E007592DB /* AppDelegate.m */; };
 		C31A7A85210EB13E007592DB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C31A7A84210EB13E007592DB /* ViewController.m */; };
 		C31A7A88210EB13E007592DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C31A7A86210EB13E007592DB /* Main.storyboard */; };
@@ -42,6 +44,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04F785632114620000D69360 /* WebViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewViewController.h; sourceTree = "<group>"; };
+		04F785642114620000D69360 /* WebViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewViewController.m; sourceTree = "<group>"; };
+		4F7019BACA97EBD812FA2631 /* Pods-WebPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebPro/Pods-WebPro.debug.xcconfig"; sourceTree = "<group>"; };
+		57498DB6E24481EF76896D65 /* libPods-WebPro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WebPro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		88040EC567D57BFDED67CDA3 /* Pods-WebPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebPro/Pods-WebPro.release.xcconfig"; sourceTree = "<group>"; };
 		C31A7A7D210EB13E007592DB /* WebPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C31A7A80210EB13E007592DB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C31A7A81210EB13E007592DB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -77,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC77B5BB5DC918AED2A0D25C /* libPods-WebPro.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +105,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B1E45FC00F465523D48713F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				57498DB6E24481EF76896D65 /* libPods-WebPro.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		552A910BEA1333A3E51A6979 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4F7019BACA97EBD812FA2631 /* Pods-WebPro.debug.xcconfig */,
+				88040EC567D57BFDED67CDA3 /* Pods-WebPro.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C31A7A74210EB13E007592DB = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +129,8 @@
 				C31A7A98210EB140007592DB /* WebProTests */,
 				C31A7AA3210EB140007592DB /* WebProUITests */,
 				C31A7A7E210EB13E007592DB /* Products */,
+				552A910BEA1333A3E51A6979 /* Pods */,
+				3B1E45FC00F465523D48713F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -124,6 +151,8 @@
 				C31A7A81210EB13E007592DB /* AppDelegate.m */,
 				C31A7A83210EB13E007592DB /* ViewController.h */,
 				C31A7A84210EB13E007592DB /* ViewController.m */,
+				04F785632114620000D69360 /* WebViewViewController.h */,
+				04F785642114620000D69360 /* WebViewViewController.m */,
 				C3394087210F1CB20091FE34 /* FSActionSheet */,
 				C3394093210F1CB20091FE34 /* UIImage+InsetEdge.h */,
 				C3394094210F1CB20091FE34 /* UIImage+InsetEdge.m */,
@@ -186,6 +215,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C31A7AA9210EB140007592DB /* Build configuration list for PBXNativeTarget "WebPro" */;
 			buildPhases = (
+				854D4C8D80F442D96265B53C /* [CP] Check Pods Manifest.lock */,
 				C31A7A79210EB13E007592DB /* Sources */,
 				C31A7A7A210EB13E007592DB /* Frameworks */,
 				C31A7A7B210EB13E007592DB /* Resources */,
@@ -246,19 +276,22 @@
 				TargetAttributes = {
 					C31A7A7C210EB13E007592DB = {
 						CreatedOnToolsVersion = 9.3;
+						ProvisioningStyle = Automatic;
 					};
 					C31A7A94210EB140007592DB = {
 						CreatedOnToolsVersion = 9.3;
+						ProvisioningStyle = Automatic;
 						TestTargetID = C31A7A7C210EB13E007592DB;
 					};
 					C31A7A9F210EB140007592DB = {
 						CreatedOnToolsVersion = 9.3;
+						ProvisioningStyle = Automatic;
 						TestTargetID = C31A7A7C210EB13E007592DB;
 					};
 				};
 			};
 			buildConfigurationList = C31A7A78210EB13E007592DB /* Build configuration list for PBXProject "WebPro" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -306,6 +339,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		854D4C8D80F442D96265B53C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WebPro-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C31A7A79210EB13E007592DB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -317,6 +371,7 @@
 				C3394098210F1CB20091FE34 /* FSActionSheetItem.m in Sources */,
 				C31A7A85210EB13E007592DB /* ViewController.m in Sources */,
 				C31A7A90210EB140007592DB /* main.m in Sources */,
+				04F785652114620000D69360 /* WebViewViewController.m in Sources */,
 				C3394095210F1CB20091FE34 /* FSActionSheet.m in Sources */,
 				C31A7A82210EB13E007592DB /* AppDelegate.m in Sources */,
 			);
@@ -485,16 +540,14 @@
 		};
 		C31A7AAA210EB140007592DB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F7019BACA97EBD812FA2631 /* Pods-WebPro.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9U8J7M5J7U;
 				INFOPLIST_FILE = WebPro/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kangqj.WebPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -503,16 +556,14 @@
 		};
 		C31A7AAB210EB140007592DB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88040EC567D57BFDED67CDA3 /* Pods-WebPro.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9U8J7M5J7U;
 				INFOPLIST_FILE = WebPro/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kangqj.WebPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -526,11 +577,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9U8J7M5J7U;
 				INFOPLIST_FILE = WebProTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kangqj.WebProTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -545,11 +592,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9U8J7M5J7U;
 				INFOPLIST_FILE = WebProTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kangqj.WebProTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -563,11 +606,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9U8J7M5J7U;
 				INFOPLIST_FILE = WebProUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kangqj.WebProUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -581,11 +620,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9U8J7M5J7U;
 				INFOPLIST_FILE = WebProUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kangqj.WebProUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

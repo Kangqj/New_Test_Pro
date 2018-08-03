@@ -11,6 +11,27 @@
 #import "UIImage+InsetEdge.h"
 #import "FSActionSheet.h"
 #import <Photos/Photos.h>
+#import <objc/runtime.h>
+#import "WebViewViewController.h"
+
+static char imgUrlArrayKey;
+
+@interface WKWebView (imageArr)
+
+@end
+
+@implementation WKWebView (imageArr)
+
+- (void)setMethod:(NSArray *)imgUrlArray
+{
+    objc_setAssociatedObject(self, &imgUrlArrayKey, imgUrlArray, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSArray *)getImgUrlArray
+{
+    return objc_getAssociatedObject(self, &imgUrlArrayKey);
+}
+@end
 
 @interface ViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate, PHPhotoLibraryChangeObserver>
 {
@@ -27,6 +48,7 @@
 @end
 
 @implementation ViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -230,6 +252,9 @@
         
         [textField resignFirstResponder];
     }
+    
+    WebViewViewController *vc = [[WebViewViewController alloc] init];
+    [self presentViewController:vc animated:YES completion:NULL];
     
     return YES;
 }
